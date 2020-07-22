@@ -1,0 +1,7 @@
+{
+    "host" : "localhost",
+    "user" : "hbstudent",
+    "password":"hbstudent",
+    "database":"bluetooth",
+    "jwtPrivateKey":"jsonwebtoken"
+}
