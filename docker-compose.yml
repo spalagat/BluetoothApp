@@ -3,7 +3,7 @@ version: '3'
 services:
   nodejs:
     volumes:
-     - "/home/sandeep/androidApiProjects/BluetoothApp:/home/node/covidproj:rw"
+     - "/home/sandeep/androidApiProjects/BluetoothApp:/home/palagati_s/nodeProjects/BluetoothApp:rw"
     build:
       context: .
       dockerfile: Dockerfile

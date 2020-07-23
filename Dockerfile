@@ -1,10 +1,10 @@
 FROM node:10-alpine
 
-RUN mkdir -p /home/node/covidproj/node_modules && chown -R node:node /home/node/covidproj
+RUN mkdir -p /home/palagati_s/nodeProjects/BluetoothApp/node_modules && chown -R node:node /home/palagati_s/nodeProjects/BluetoothApp
 
-WORKDIR /home/node/covidproj
+WORKDIR /home/palagati_s/nodeProjects/BluetoothApp
 
-COPY covid19/package*.json ./
+COPY /package*.json ./
 
 USER node
 
@@ -12,6 +12,6 @@ RUN npm install
 
 COPY --chown=node:node . .
 
-EXPOSE 8080
+EXPOSE 80:80
 
 CMD [ "node", "app.js" ]
