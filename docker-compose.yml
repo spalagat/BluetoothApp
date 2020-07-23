@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  nodejs:
+    volumes:
+     - "/home/sandeep/androidApiProjects/BluetoothApp:/home/node/covidproj:rw"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: nodejs
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  webserver:
+    image: nginx:mainline-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx-conf:/etc/nginx/conf.d
+    depends_on:
+      - nodejs
+    networks:
+      - app-network
+
+
+  database:
+    image: 'mongo'
+    container_name: 'covid_mongo'
+    ports:
+        - '27017:27017'
+
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
