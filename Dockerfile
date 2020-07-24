@@ -1,8 +1,8 @@
 FROM node:10-alpine
 
-RUN mkdir -p /home/node/bluetoothApp/public/node_modules && chown -R node:node /home/node/bluetoothApp/public
+RUN mkdir -p /home/node/bluetoothApp/public/node_modules && chown -R node:node /home/node/bluetoothApp
 
-WORKDIR /home/node/bluetoothApp
+WORKDIR /home/node/bluetoothApp/public
 
 COPY public/package*.json ./
 
