@@ -3,22 +3,22 @@ version: '3'
 services:
   nodejs:
     volumes:
-     - "/home/sandeep/androidApiProjects/BluetoothApp:/home/palagati_s/nodeProjects/BluetoothApp:rw"
+     - "/home/sandeep/BluetoothProject/BluetoothApp/public:/home/node/bluetoothApp:rw"
     build:
       context: .
       dockerfile: Dockerfile
     image: nodejs
-    container_name: nodejs
+    container_name: bluetooth_nodejs
     restart: unless-stopped
     networks:
       - app-network
 
   webserver:
     image: nginx:mainline-alpine
-    container_name: webserver
+    container_name: bluetooth_webserver
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "8080:8080"
     volumes:
       - ./nginx-conf:/etc/nginx/conf.d
     depends_on:
@@ -29,7 +29,7 @@ services:
 
   database:
     image: 'mongo'
-    container_name: 'covid_mongo'
+    container_name: 'bluetooth_mongo'
     ports:
         - '27017:27017'
 

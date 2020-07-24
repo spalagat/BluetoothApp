@@ -1,10 +1,10 @@
 FROM node:10-alpine
 
-RUN mkdir -p /home/palagati_s/nodeProjects/BluetoothApp/node_modules && chown -R node:node /home/palagati_s/nodeProjects/BluetoothApp
+RUN mkdir -p /home/node/bluetoothApp/public/node_modules && chown -R node:node /home/node/bluetoothApp
 
-WORKDIR /home/palagati_s/nodeProjects/BluetoothApp
+WORKDIR /home/node/bluetoothApp
 
-COPY /package*.json ./
+COPY public/package*.json ./
 
 USER node
 
@@ -12,6 +12,6 @@ RUN npm install
 
 COPY --chown=node:node . .
 
-EXPOSE 80:80
+EXPOSE 8080
 
 CMD [ "node", "app.js" ]
