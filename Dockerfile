@@ -1,6 +1,6 @@
 FROM node:10-alpine
 
-RUN mkdir -p /home/node/bluetoothApp/public/node_modules && chown -R node:node /home/node/bluetoothApp
+RUN mkdir -p /home/node/bluetoothApp/public/node_modules && chown -R node:node /home/node/bluetoothApp/public
 
 WORKDIR /home/node/bluetoothApp
 
