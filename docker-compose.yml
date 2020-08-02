@@ -3,7 +3,7 @@ version: '3'
 services:
   nodejs:
     volumes:
-     - "/home/sandeep/BluetoothProject/BluetoothApp/public:/home/node/bluetoothApp/public:rw"
+     - "/home/ec2-user/node/BluetoothApp/public:/home/node/bluetoothApp:rw"
     build:
       context: .
       dockerfile: Dockerfile
