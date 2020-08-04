@@ -5,6 +5,9 @@ const urlEncodedParser=bodyParser.urlencoded({extended:false});
 const {check,ValidationResult, validationResult}=require("express-validator");
 const studentActions=require("../../models/student/studentaction");
 const authObj=require("../../auth/auth");
+var AWS = require('aws-sdk');
+AWS.config.update({region: 'us-east-2'});
+ 
 
 router.post("/addSubject",urlEncodedParser,[check("subjectid").not().isEmpty().withMessage("Subjectid is required")],authObj.verify,
             async function(req,res){
@@ -130,5 +133,64 @@ router.get("/subjects",authObj.verify,async function(req,res){
         res.status(400).send(response);
     }
 });
+router.get("/verify",authObj.verify,async function(req,res){
+    const bucket='imagebucket180220-dev';
+    const source="public/"+res.locals.id;
+    const target="public/"+res.locals.id+"_dup";
+    const client = new AWS.Rekognition();
+    const params = {
+        SourceImage: {
+          S3Object: {
+            Bucket: bucket,
+            Name: source
+          },
+        },
+        TargetImage: {
+          S3Object: {
+            Bucket: bucket,
+            Name: target
+          },
+        },
+        SimilarityThreshold: 95
+      }
+
+      client.compareFaces(params, async function(err, response) {
+        if (err) {
+          const response={
+              result:false,
+              message:err.message
+          }
+          res.status(400).send(response);
+        } else {
+            if(response.FaceMatches.length>0){
+                 const compareResult=response.FaceMatches[0]
+                 if(compareResult.Similarity>95){
+                     const response={
+                         result:true,
+                         message:"verification is successful"
+                     }
+                     res.status(200).send(response);
+                 }
+                 else{
+                     const response={
+                         result:false,
+                         message:"verification failed"
+                     }
+                     res.status(200).send(response);
+                 }
+            }
+            else{
+                const response={
+                    result:false,
+                    message:"verification failed"
+                }
+                res.status(200).send(response);
+            }
+         
+        } // if
+      });
+
+
+})
 
 module.exports=router;

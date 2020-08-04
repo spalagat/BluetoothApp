@@ -28,7 +28,7 @@ const params = {
         Name: photo_target
       },
     },
-    SimilarityThreshold: 10
+    SimilarityThreshold: 90
   }
   client.compareFaces(params, async function(err, response) {
     if (err) {
@@ -39,7 +39,7 @@ const params = {
             response.FaceMatches.forEach(data => {
                 let position   = data.Face.BoundingBox
                 let similarity = data.Similarity
-                console.log()
+                console.log("similarity is ",similarity);
               }) // for response.faceDetails
         }
         else{
