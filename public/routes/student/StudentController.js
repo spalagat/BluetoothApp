@@ -134,9 +134,10 @@ router.get("/subjects",authObj.verify,async function(req,res){
     }
 });
 router.get("/verify",authObj.verify,async function(req,res){
+    console.log("Inside verify method ");
     const bucket='imagebucket180220-dev';
-    const source="public/"+res.locals.id;
-    const target="public/"+res.locals.id+"_dup";
+    const source="public/"+res.locals.id+".jpeg";
+    const target="public/"+res.locals.id+"_dup.jpeg";
     const client = new AWS.Rekognition();
     const params = {
         SourceImage: {
