@@ -4,7 +4,7 @@
   "description": "Dependencies for bluetooth attendance app",
   "main": "app.js",
   "dependencies": {
-    "aws-sdk": "^2.725.0",
+    "aws-sdk": "^2.1362.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "config": "^3.3.1",
